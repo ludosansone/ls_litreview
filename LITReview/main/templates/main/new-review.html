@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>
+        Nouvelle critique
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label for="headline">Titre</label>
+            <input type="text" id="headline" name="headline"/>
+        </p>
+        <p>
+            <label for="body">Critique</label>
+            <input type="text" id="body" name="body"/>
+        </p>
+        <p>
+            <label for="rating">Notation</label>
+            <input type="text" id="rating" name="rating"/>
+        </p>
+        <p>
+            <input type="submit" value="Publier la Critique"/>
+        </p>
+    </form>
+{% endblock %}

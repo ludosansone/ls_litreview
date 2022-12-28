@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>
+        Modifier un ticket
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label for="title">Titre</label>
+            <input type="text" id="title" name="title"/>
+        </p>
+        <p>
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description"/>
+        </p>
+        <p>
+            <input type="submit" value="Enregistrer les modifications"/>
+        </p>
+    </form>
+{% endblock %}

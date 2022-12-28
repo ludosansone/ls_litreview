@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>
+        Mes Contributions
+    </h2>
+
+    <p>
+        Ici, la liste de mes contributions
+    </p>
+    <p>
+        <a href="{% url 'edit-ticket' %}">
+            Modifier un ticket
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'edit-review' %}">
+            Modifier une critique
+        </a>
+    </p>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>
+        Inscrivez-vous
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id=username" name="username"/>
+        </p>
+        <p>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password"/>
+        </p>
+        <p>
+            <label for="password-confirmation">Confirmation du Mot de passe</label>
+            <input type="password" id="password-confirmation" name="password-confirmation"/>
+        </p>
+        <p>
+            <input type="submit" value="Valider l'inscription"/>
+        </p>
+    </form>
+{% endblock %}

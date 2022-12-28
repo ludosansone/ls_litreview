@@ -1,0 +1,47 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            LitReview
+        </title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'main/styles/styles.css' %}">
+    </head>    
+
+    <body>
+        <a href="{% url 'home' %}">
+            <h1>
+                Lit Review
+            </h1>
+        </a>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'subscribs' %}">
+                        Mes Abonnements
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'contributions' %}">
+                        Mes Contributions
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'home' %}">
+                        Déconnexion
+                    </a>
+                </li>
+        </ul>
+        </nav>
+
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer>
+            MVP du projet Lit Review
+        </footer>
+    </body>
+</html>

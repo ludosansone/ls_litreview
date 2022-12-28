@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>
+        Mon Flux
+    </h2>
+
+    <p>
+        <a href="{% url 'new-ticket' %}">
+            Créer un ticket
+        </a>
+</p>
+
+    <button>
+        Tout
+    </button>
+
+    <button>
+        Critiques
+    </button>
+
+    <button>
+        Tickets
+    </button>
+
+    <p>
+        Ici, mon flux constitué de mes tickets, et de mes critiques
+    </p>
+    <p>
+        <a href="{% url 'edit-ticket' %}">
+            Modifier un ticket
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'new-review' %}">
+            Répondre à un ticket
+        </a>
+    </p>
+{% endblock %}
