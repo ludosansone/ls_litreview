@@ -9,7 +9,7 @@
         {% csrf_token %}
         <p>
             <label for="title">Titre</label>
-            <input type="text" id="title" name="title"/>
+            <input type="text" id="title" name="title" placeholder="{{ result.title }}"/>
         </p>
         <p>
             <label for="description">Description</label>
@@ -19,4 +19,9 @@
             <input type="submit" value="Enregistrer les modifications"/>
         </p>
     </form>
+    <p>
+        <a href="{% url 'contributions' %}">
+            Retour à mes contributions
+        </a>
+    </p>
 {% endblock %}

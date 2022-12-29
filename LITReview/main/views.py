@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from main.models import Ticket
 
 
 def home(request):
@@ -11,7 +12,9 @@ def subscribs(request):
 
 
 def contributions(request):
-    return render(request, 'main/contributions.html')
+    results = Ticket.objects.filter(user__username = 'ludovicsansone')
+
+    return render(request, 'main/contributions.html', {'results': results})
 
 
 def signin(request):
@@ -26,8 +29,9 @@ def new_ticket(request):
     return render(request, 'main/new-ticket.html')
 
 
-def edit_ticket(request):
-    return render(request, 'main/edit-ticket.html')
+def edit_ticket(request, id):
+    result = Ticket.objects.get(id = id)
+    return render(request, 'main/edit-ticket.html', {'result': result})
 
 
 def new_review(request):
