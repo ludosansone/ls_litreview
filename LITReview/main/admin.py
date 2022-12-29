@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import User, Ticket
+from main.models import User, Ticket, Review
 
 
 @admin.register(User)
@@ -11,3 +11,7 @@ class UserAdmin(admin.ModelAdmin):
 class TicketAdmin(admin.ModelAdmin):
     list_display = ('title', 'user')
 
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('headline', 'user')
