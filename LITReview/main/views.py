@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import CharField, Value
 from main.models import Ticket, Review
-from main.forms import TicketForm
+from main.forms import TicketForm, ReviewForm
 
 
 def home(request):
@@ -41,8 +41,7 @@ def new_ticket(request):
     if request.method == 'POST':
         form = TicketForm(request.POST)
         if form.is_valid():
-            ticket_title = form.cleaned_data['title']
-            ticket_description = form.cleaned_data['description']
+            new_ticket = form.save()
 
             return redirect('home')
     else:
@@ -52,16 +51,38 @@ def new_ticket(request):
 
 
 def edit_ticket(request, id):
-    result = Ticket.objects.get(id = id)
+    ticket = Ticket.objects.get(id = id)
+    if request.method == 'POST':
+        form = TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            ticket_modified = form.save()
+            return redirect('home')
+    else:
+        form = TicketForm(instance=ticket)
 
-    return render(request, 'main/edit-ticket.html', {'result': result})
+    return render(request, 'main/edit-ticket.html', {'form': form})
 
 
 def new_review(request):
-    return render(request, 'main/new-review.html')
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid:
+            new_review = form.save()
+            return redirect('home')
+    else:
+        form = ReviewForm()
+    return render(request, 'main/new-review.html',
+    {'form': form})
 
 
 def edit_review(request, id):
-    result = Review.objects.get(id = id)
+    review = Review.objects.get(id = id)
 
-    return render(request, 'main/edit-review.html', {'result': result})
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            review_modified = form.save()
+            return redirect('home')
+    else:
+        form = ReviewForm(instance=review)
+    return render(request, 'main/edit-review.html', {'form': form})

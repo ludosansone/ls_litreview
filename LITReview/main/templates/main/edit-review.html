@@ -7,20 +7,7 @@
 
     <form method="post">
         {% csrf_token %}
-        <p>
-            <label for="headline">Titre</label>
-            <input type="text" id="headline" name="headline"/>
-        </p>
-        <p>
-            <label for="body">Critique</label>
-            <input type="text" id="body" name="body"/>
-        </p>
-        <p>
-            <label for="rating">Notation</label>
-            <input type="text" id="rating" name="rating"/>
-        </p>
-        <p>
-            <input type="submit" value="Enregistrer les modifications"/>
-        </p>
+        {{ form.as_p }}
+        <input type="submit" value="Enregistrer les modifications"/>
     </form>
 {% endblock %}
