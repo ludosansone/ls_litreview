@@ -5,18 +5,15 @@
     Mes Contributions
 </h2>
 
-{% for ticket in results %}
+{% for post in context %}
 <p>
-    <a href="{% url 'edit-ticket' ticket.id %}">
-        {{ ticket.title }}
-    </a>
+    {% if post.content_type == 'TICKET' %}
+    {{ post.title }}
+    {% elif post.content_type == 'REVIEW' %}
+    {{ post.headline }}
+    {% endif %}
 </p>
 {% endfor %}
 
-<p>
-    <a href="{% url 'edit-review' %}">
-        Modifier une critique
-    </a>
-</p>
 
 {% endblock %}

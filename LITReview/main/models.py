@@ -23,6 +23,7 @@ class Ticket(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,
                              verbose_name='Auteur')
+    time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

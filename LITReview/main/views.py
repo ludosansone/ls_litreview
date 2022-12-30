@@ -1,6 +1,8 @@
+from itertools import chain
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import Ticket
+from django.db.models import CharField, Value
+from main.models import Ticket, Review
 
 
 def home(request):
@@ -12,10 +14,19 @@ def subscribs(request):
 
 
 def contributions(request):
-    results = Ticket.objects.filter(user__username = 'ludovicsansone')
+    tickets = Ticket.objects.filter(user__username = 'ludovicsansone')
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    reviews = Review.objects.filter(user__username = 'ludovicsansone')
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
-    return render(request, 'main/contributions.html', {'results': results})
+    context = sorted(
+        chain(reviews, tickets), 
+        key=lambda context: context.time_created, 
+        reverse=True
+    )
 
+    return render(request, 'main/contributions.html', {'context': context})
+        
 
 def signin(request):
     return render(request, 'main/signin.html')
