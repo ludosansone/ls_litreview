@@ -8,9 +8,9 @@
 {% for post in context %}
 <p>
     {% if post.content_type == 'TICKET' %}
-    {{ post.title }}
+    {% include 'main/snippets/ticket.html' %}
     {% elif post.content_type == 'REVIEW' %}
-    {{ post.headline }}
+    {% include 'main/snippets/review.html' %}
     {% endif %}
 </p>
 {% endfor %}

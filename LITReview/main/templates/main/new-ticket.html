@@ -5,18 +5,9 @@
         Créer un ticket
     </h2>
 
-    <form method="post">
+    <form method="post" action="" novalidate>
         {% csrf_token %}
-        <p>
-            <label for="title">Titre</label>
-            <input type="text" id="title" name="title"/>
-        </p>
-        <p>
-            <label for="description">Description</label>
-            <input type="text" id="description" name="description"/>
-        </p>
-        <p>
-            <input type="submit" value="Créer le ticket"/>
-        </p>
+        {{ form.as_p }}
+        <input type="submit" value="Créer le ticket"/>
     </form>
 {% endblock %}

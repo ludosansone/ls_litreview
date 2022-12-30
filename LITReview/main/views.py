@@ -1,8 +1,9 @@
 from itertools import chain
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import CharField, Value
 from main.models import Ticket, Review
+from main.forms import TicketForm
 
 
 def home(request):
@@ -37,11 +38,22 @@ def signup(request):
 
 
 def new_ticket(request):
-    return render(request, 'main/new-ticket.html')
+    if request.method == 'POST':
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            ticket_title = form.cleaned_data['title']
+            ticket_description = form.cleaned_data['description']
+
+            return redirect('home')
+    else:
+        form = TicketForm()
+
+    return render(request, 'main/new-ticket.html', {'form': form})
 
 
 def edit_ticket(request, id):
     result = Ticket.objects.get(id = id)
+
     return render(request, 'main/edit-ticket.html', {'result': result})
 
 
@@ -49,5 +61,7 @@ def new_review(request):
     return render(request, 'main/new-review.html')
 
 
-def edit_review(request):
-    return render(request, 'main/edit-review.html')
+def edit_review(request, id):
+    result = Review.objects.get(id = id)
+
+    return render(request, 'main/edit-review.html', {'result': result})
