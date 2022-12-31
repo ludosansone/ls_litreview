@@ -63,11 +63,19 @@ def edit_ticket(request, id):
     return render(request, 'main/edit-ticket.html', {'form': form})
 
 
-def new_review(request):
+def new_review(request, ticket_id):
+    review_ticket = Ticket .objects.get(id = ticket_id)
+    
     if request.method == 'POST':
         form = ReviewForm(request.POST)
-        if form.is_valid:
-            new_review = form.save()
+        if form.is_valid():
+            new_review = Review(
+                headline = form.cleaned_data['headline'],
+                body = form.cleaned_data['body'],
+                rating = form.cleaned_data['rating'],
+                user = form.cleaned_data['user'],
+                ticket = review_ticket)
+            new_review.save()
             return redirect('home')
     else:
         form = ReviewForm()
@@ -86,3 +94,16 @@ def edit_review(request, id):
     else:
         form = ReviewForm(instance=review)
     return render(request, 'main/edit-review.html', {'form': form})
+
+
+def details_ticket(request, id):
+    ticket = Ticket.objects.get(id = id)
+
+    return render(request, 'main/details-ticket.html', {'ticket': ticket})
+
+
+
+def details_review(request, id):
+    review = Review.objects.get(id = id)
+
+    return render(request, 'main/details-review.html', {'review': review})

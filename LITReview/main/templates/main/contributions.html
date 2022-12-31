@@ -4,7 +4,19 @@
 <h2>
     Mes Contributions
 </h2>
-
+<table>
+    <tr>
+        <th>
+            Type de contribution
+        </th>
+        <th>
+            Intitulé
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+    <tr>
 {% for post in context %}
 <p>
     {% if post.content_type == 'TICKET' %}
@@ -12,8 +24,9 @@
     {% elif post.content_type == 'REVIEW' %}
     {% include 'main/snippets/review.html' %}
     {% endif %}
-</p>
+    
+</tr>
 {% endfor %}
-
+</table>
 
 {% endblock %}

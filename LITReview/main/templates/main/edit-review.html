@@ -10,4 +10,16 @@
         {{ form.as_p }}
         <input type="submit" value="Enregistrer les modifications"/>
     </form>
+
+    <p>
+        <a href="{% url 'contributions' %}">
+            Supprimer la critique
+        </a>
+    </p>
+
+    <p>
+        <a href="{% url 'contributions' %}">
+            Retour à mes contributions
+        </a>
+    </p>
 {% endblock %}

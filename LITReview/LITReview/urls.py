@@ -11,6 +11,8 @@ urlpatterns = [
     path('contributions', main_views.contributions, name='contributions'),
     path('new-ticket', main_views.new_ticket, name='new-ticket'),
     path('edit-ticket/<int:id>/', main_views.edit_ticket, name='edit-ticket'),
-    path('new-review', main_views.new_review, name='new-review'),
+    path('new-review/<int:ticket_id>/', main_views.new_review, name='new-review'),
     path('edit-review/<int:id>/', main_views.edit_review, name='edit-review'),
+    path('details-ticket/<int:id>/', main_views.details_ticket, name='details-ticket'),
+    path('details-review/<int:id>/', main_views.details_review, name='details-review'),
 ]
