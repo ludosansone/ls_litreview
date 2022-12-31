@@ -28,6 +28,10 @@ class Ticket(models.Model):
     def __str__(self):
         return self.title
 
+    def get_review_number(self):
+        review_number = Review.objects.filter(ticket = self).count()
+        return str(review_number)
+
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE,

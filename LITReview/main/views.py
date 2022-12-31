@@ -98,6 +98,7 @@ def edit_review(request, id):
 
 def details_ticket(request, id):
     ticket = Ticket.objects.get(id = id)
+    review_number = Review.objects.filter(ticket = ticket).count()
 
     return render(request, 'main/details-ticket.html', {'ticket': ticket})
 
