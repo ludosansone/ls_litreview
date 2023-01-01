@@ -29,7 +29,7 @@ class Ticket(models.Model):
         return self.title
 
     def get_review_number(self):
-        review_number = Review.objects.filter(ticket = self).count()
+        review_number = Review.objects.filter(ticket=self).count()
         return str(review_number)
 
 
@@ -37,8 +37,7 @@ class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE,
                                default=Ticket,
                                editable=False)
-    rating = models.PositiveSmallIntegerField(
-             validators=[MinValueValidator(0), MaxValueValidator(5)])
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
     body = models.CharField(max_length=8192, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Auteur')
