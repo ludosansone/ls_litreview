@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h2>
+    {{ review.headline }} ({{ review.rating }} sur 5)
+</h2>
+
+<ul>
+    <li>
+        En réponse au ticket {{ review.ticket.id }} : {{ review.ticket.title }}
+    </li>
+
+    <li>
+        A la demande de {{ review.ticket.user.username }}
+    </li>
+</ul>
+
+<h3>
+    Critique
+</h3>
+
+<article>
+    {{ review.body }}
+</article>
+
+<p>
+    Posté par : {{ review.user.username }}
+</p>
+
+<p>
+    <a href="{% url 'edit-review' review.id %}">
+        Modifier la critique
+    </a>
+</p>
+
+<p>
+    <a href="">
+        Supprimer la critique
+    </a>
+</p>
+
+<p>
+    <a href="{% url 'contributions' %}">
+        Retour à mes contributions
+    </a>
+</p>
+{% endblock %}

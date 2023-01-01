@@ -1,0 +1,13 @@
+<td>
+    Critique
+</td>
+<td>
+    <a href="{% url 'details-review' post.id %}">
+        {{ post.headline }} ({{ post.ticket }})
+    </a>
+</td>
+<td>
+    <a href="{% url 'edit-review' post.id %}">
+        Modifier
+    </a>
+</td>

@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h2>
+    {{ ticket.title }} ({{ ticket.get_review_number }} critique{{ ticket.get_review_number|pluralize }})
+</h2>
+
+<p>
+    {{ ticket.description }}
+</p>
+
+<p>
+    Posté par : {{ ticket.user.username }}
+</p>
+
+<p>
+    <a href="{% url 'new-review' ticket.id %}">
+        Rédiger une critique
+    </a>
+</p>
+<p>
+    <a href="{% url 'edit-ticket' ticket.id %}">
+        Modifier le ticket
+    </a>
+</p>
+
+<p>
+    <a href="">
+        Supprimer le ticket
+    </a>
+</p>
+
+<p>
+    <a href="{% url 'contributions' %}">
+        Retour à mes contributions
+    </a>
+</p>
+{% endblock %}
