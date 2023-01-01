@@ -6,6 +6,9 @@
         {{ post.title }} ({{ post.get_review_number }} critique{{ post.get_review_number|pluralize }})
     </a>
 </td>
+<TD>
+    Le {{ post.time_created|date:"d/m/Y à h:m" }}
+</TD>
 <td>
     <a href="{% url 'edit-ticket' post.id %}">
         Modifier
