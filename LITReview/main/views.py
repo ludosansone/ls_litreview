@@ -60,7 +60,7 @@ def edit_ticket(request, id):
     else:
         form = TicketForm(instance=ticket)
 
-    return render(request, 'main/edit-ticket.html', {'form': form})
+    return render(request, 'main/edit-ticket.html', {'form': form, 'ticket': ticket})
 
 
 def new_review(request, ticket_id):
@@ -93,7 +93,7 @@ def edit_review(request, id):
             return redirect('home')
     else:
         form = ReviewForm(instance=review)
-    return render(request, 'main/edit-review.html', {'form': form})
+    return render(request, 'main/edit-review.html', {'form': form, 'review': review})
 
 
 def details_ticket(request, id):
