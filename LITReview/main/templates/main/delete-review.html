@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h2>
+    Suppression de critique
+</h2>
+
+<p>
+    Etes-vous certain de vouloir supprimer la critique {{ review.headline }} ?
+</p>
+
+<p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Oui"/>
+    </form>
+</p>
+
+<p>
+    <a href="{% url 'contributions' %}">
+        Non
+    </a>
+</p>
+
+{% endblock %}

@@ -108,3 +108,25 @@ def details_review(request, id):
     review = Review.objects.get(id = id)
 
     return render(request, 'main/details-review.html', {'review': review})
+
+
+def delete_ticket(request, id):
+    ticket = Ticket.objects.get(id = id)
+
+    if request.method == 'POST':
+        ticket.delete()
+        return redirect('contributions')
+        
+    return render(request, 'main/delete-ticket.html', {'ticket': ticket})
+
+
+def delete_review(request, id):
+    review = Review.objects.get(id = id)
+
+    if request.method == 'POST':
+        review.delete()
+        return redirect('contributions')
+        
+    return render(request, 'main/delete-review.html', {'review': review})
+
+
