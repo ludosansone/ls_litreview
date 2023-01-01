@@ -4,16 +4,20 @@ from django.http import HttpResponse
 from django.db.models import CharField, Value
 from main.models import Ticket, Review
 from main.forms import TicketForm, ReviewForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def home(request):
     return render(request, 'main/home.html')
 
 
+@login_required
 def subscribs(request):
     return render(request, 'main/subscribs.html')
 
 
+@login_required
 def contributions(request):
     tickets = Ticket.objects.filter(user__username='ludovicsansone')
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
@@ -29,14 +33,7 @@ def contributions(request):
     return render(request, 'main/contributions.html', {'context': context})
 
 
-def signin(request):
-    return render(request, 'main/signin.html')
-
-
-def signup(request):
-    return render(request, 'main/signup.html')
-
-
+@login_required
 def new_ticket(request):
     if request.method == 'POST':
         form = TicketForm(request.POST)
@@ -50,6 +47,7 @@ def new_ticket(request):
     return render(request, 'main/new-ticket.html', {'form': form})
 
 
+@login_required
 def edit_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
     if request.method == 'POST':
@@ -63,6 +61,7 @@ def edit_ticket(request, id):
     return render(request, 'main/edit-ticket.html', {'form': form, 'ticket': ticket})
 
 
+@login_required
 def new_review(request, ticket_id):
     review_ticket = Ticket .objects.get(id=ticket_id)
 
@@ -82,6 +81,7 @@ def new_review(request, ticket_id):
     return render(request, 'main/new-review.html', {'form': form})
 
 
+@login_required
 def edit_review(request, id):
     review = Review.objects.get(id=id)
 
@@ -95,18 +95,21 @@ def edit_review(request, id):
     return render(request, 'main/edit-review.html', {'form': form, 'review': review})
 
 
+@login_required
 def details_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
 
     return render(request, 'main/details-ticket.html', {'ticket': ticket})
 
 
+@login_required
 def details_review(request, id):
     review = Review.objects.get(id=id)
 
     return render(request, 'main/details-review.html', {'review': review})
 
 
+@login_required
 def delete_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
 
@@ -117,6 +120,7 @@ def delete_ticket(request, id):
     return render(request, 'main/delete-ticket.html', {'ticket': ticket})
 
 
+@login_required
 def delete_review(request, id):
     review = Review.objects.get(id=id)
 

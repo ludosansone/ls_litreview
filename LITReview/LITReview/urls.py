@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path
+from authentication import views as auth_views
 from main import views as main_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_views.signin, name='signin'),
-    path('signup', main_views.signup, name='signup'),
+    path('', auth_views.signin, name='signin'),
+    path('signup', auth_views.signup, name='signup'),
+    path('signout', auth_views.signout, name='signout'),
     path('home', main_views.home, name='home'),
     path('subscribs', main_views.subscribs, name='subscribs'),
     path('contributions', main_views.contributions, name='contributions'),
