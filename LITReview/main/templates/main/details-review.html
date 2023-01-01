@@ -7,6 +7,9 @@
 
 <ul>
     <li>
+        Publiée le {{ review.time_created|date:"d/m/Y à h:m" }}
+    </li>
+    <li>
         En réponse au ticket {{ review.ticket.id }} : {{ review.ticket.title }}
     </li>
 
