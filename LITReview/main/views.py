@@ -19,9 +19,9 @@ def subscribs(request):
 
 @login_required
 def contributions(request):
-    tickets = Ticket.objects.filter(user__username='ludovicsansone')
+    tickets = Ticket.objects.filter(user=request.user)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
-    reviews = Review.objects.filter(user__username='ludovicsansone')
+    reviews = Review.objects.filter(user=request.user)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
     context = sorted(
