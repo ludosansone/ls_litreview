@@ -38,7 +38,12 @@ def new_ticket(request):
     if request.method == 'POST':
         form = TicketForm(request.POST)
         if form.is_valid():
-            form.save()
+            ticket = Ticket(
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                user=request.user
+            )
+            ticket.save()
 
             return redirect('home')
     else:
@@ -68,13 +73,13 @@ def new_review(request, ticket_id):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            new_review = Review(
+            review = Review(
                 headline=form.cleaned_data['headline'],
                 body=form.cleaned_data['body'],
                 rating=form.cleaned_data['rating'],
-                user=form.cleaned_data['user'],
+                user=request.user,
                 ticket=review_ticket)
-            new_review.save()
+            review.save()
             return redirect('home')
     else:
         form = ReviewForm()

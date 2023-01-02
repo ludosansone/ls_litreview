@@ -22,7 +22,8 @@ class Ticket(models.Model):
                                    blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,
-                             verbose_name='Auteur')
+                             verbose_name='Auteur',
+                             editable=False)
     time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -40,5 +41,8 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
     body = models.CharField(max_length=8192, blank=True)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Auteur')
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='Auteur',
+        editable=False)
     time_created = models.DateTimeField(auto_now_add=True)
