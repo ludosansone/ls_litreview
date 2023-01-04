@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 
 
@@ -20,7 +21,7 @@ class Ticket(models.Model):
     description = models.CharField(verbose_name='Description',
                                    max_length=2048,
                                    blank=True)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(to=get_user_model(),
                              on_delete=models.CASCADE,
                              editable=False)
     time_created = models.DateTimeField(auto_now_add=True)
@@ -41,7 +42,7 @@ class Review(models.Model):
                                               verbose_name='Notation')
     headline = models.CharField(max_length=128, verbose_name='Entête')
     body = models.CharField(max_length=8192, blank=True, verbose_name='Critique')
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(to=get_user_model(),
                              on_delete=models.CASCADE,
                              editable=False)
     time_created = models.DateTimeField(auto_now_add=True)
