@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import CharField, Value
 from main.models import Ticket, Review
-from main.forms import TicketForm, ReviewForm
+from main.forms import TicketForm, ReviewForm, FollowForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -14,7 +14,14 @@ def home(request):
 
 @login_required
 def subscribs(request):
-    return render(request, 'main/subscribs.html')
+    if request.method == 'POST':
+        form = FollowForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = FollowForm()
+
+    return render(request, 'main/subscribs.html', {'form': form})
 
 
 @login_required
