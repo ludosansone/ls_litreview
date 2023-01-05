@@ -30,7 +30,6 @@ def contributions(request):
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     reviews = Review.objects.filter(user=request.user)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
-
     context = sorted(
         chain(reviews, tickets),
         key=lambda context: context.time_created,
@@ -48,10 +47,8 @@ def new_ticket(request):
             ticket = Ticket(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
-                user=request.user
-            )
+                user=request.user)
             ticket.save()
-
             return redirect('home')
     else:
         form = TicketForm()
@@ -76,7 +73,6 @@ def edit_ticket(request, id):
 @login_required
 def new_review(request, ticket_id):
     review_ticket = Ticket .objects.get(id=ticket_id)
-
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -90,13 +86,13 @@ def new_review(request, ticket_id):
             return redirect('home')
     else:
         form = ReviewForm()
+
     return render(request, 'main/new-review.html', {'form': form})
 
 
 @login_required
 def edit_review(request, id):
     review = Review.objects.get(id=id)
-
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
@@ -104,6 +100,7 @@ def edit_review(request, id):
             return redirect('home')
     else:
         form = ReviewForm(instance=review)
+
     return render(request, 'main/edit-review.html', {'form': form, 'review': review})
 
 
@@ -124,7 +121,6 @@ def details_review(request, id):
 @login_required
 def delete_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
-
     if request.method == 'POST':
         ticket.delete()
         return redirect('contributions')
@@ -135,7 +131,6 @@ def delete_ticket(request, id):
 @login_required
 def delete_review(request, id):
     review = Review.objects.get(id=id)
-
     if request.method == 'POST':
         review.delete()
         return redirect('contributions')
@@ -143,6 +138,7 @@ def delete_review(request, id):
     return render(request, 'main/delete-review.html', {'review': review})
 
 
+@login_required
 def new_ticket_and_review(request):
     if request.method == 'POST':
         form_ticket = TicketForm(request.POST)
@@ -153,8 +149,6 @@ def new_ticket_and_review(request):
                 description=form_ticket.cleaned_data['description'],
                 user=request.user)
             new_ticket.save()
-            print(new_ticket.id)
-
             new_review = Review(
                 ticket=new_ticket,
                 user=request.user,
@@ -166,4 +160,5 @@ def new_ticket_and_review(request):
     else:
         form_ticket = TicketForm()
         form_review = ReviewForm()
+
     return render(request, 'main/new-ticket-and-review.html', {'form_ticket': form_ticket, 'form_review': form_review})

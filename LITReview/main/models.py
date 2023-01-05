@@ -7,7 +7,6 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     class meta:
-        unique_together = ('user', 'followed_user')
         body = models.TextField(verbose_name='Body',
                                 max_length=8192,
                                 blank=True)
@@ -46,3 +45,17 @@ class Review(models.Model):
                              on_delete=models.CASCADE,
                              editable=False)
     time_created = models.DateTimeField(auto_now_add=True)
+
+
+class UserFollows(models.Model):
+    user = models.ForeignKey(
+        User,
+        related_name='user',
+        on_delete=models.CASCADE)
+    followed_user = models.ForeignKey(
+        User,
+        related_name='followed_user',
+        on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'followed_user')
