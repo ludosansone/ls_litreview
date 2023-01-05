@@ -141,3 +141,29 @@ def delete_review(request, id):
         return redirect('contributions')
 
     return render(request, 'main/delete-review.html', {'review': review})
+
+
+def new_ticket_and_review(request):
+    if request.method == 'POST':
+        form_ticket = TicketForm(request.POST)
+        form_review = ReviewForm(request.POST)
+        if (form_ticket.is_valid()) and (form_review.is_valid()):
+            new_ticket = Ticket(
+                title=form_ticket.cleaned_data['title'],
+                description=form_ticket.cleaned_data['description'],
+                user=request.user)
+            new_ticket.save()
+            print(new_ticket.id)
+
+            new_review = Review(
+                ticket=new_ticket,
+                user=request.user,
+                headline=form_review.cleaned_data['headline'],
+                body=form_review.cleaned_data['body'],
+                rating=form_review.cleaned_data['rating'])
+            new_review.save()
+            return redirect('contributions')
+    else:
+        form_ticket = TicketForm()
+        form_review = ReviewForm()
+    return render(request, 'main/new-ticket-and-review.html', {'form_ticket': form_ticket, 'form_review': form_review})

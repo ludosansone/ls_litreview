@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>
+        Nouvelle critique
+    </h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form_ticket.as_p }}
+        {{ form_review.as_p }}
+        <input type="submit" value="Publier la critique"/>
+    </form>
+{% endblock %}
