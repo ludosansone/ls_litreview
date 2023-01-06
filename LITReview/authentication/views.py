@@ -4,6 +4,8 @@ from authentication.forms import LoginForm, SignupForm
 
 
 def signin(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     form = LoginForm()
     error = ''
 
