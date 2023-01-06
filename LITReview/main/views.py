@@ -2,7 +2,9 @@ from itertools import chain
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import CharField, Value
-from main.models import Ticket, Review
+from main.models import Ticket, Review, UserFollows, User
+
+
 from main.forms import TicketForm, ReviewForm, FollowForm
 from django.contrib.auth.decorators import login_required
 
@@ -17,11 +19,17 @@ def subscribs(request):
     if request.method == 'POST':
         form = FollowForm(request.POST)
         if form.is_valid():
-            pass
+            followed_user = User.objects.get(username=form.cleaned_data['username'])
+            user_follows = UserFollows(
+                user=request.user,
+                followed_user=followed_user)
+            user_follows.save()
+            return redirect('subscribs')
     else:
         form = FollowForm()
-
-    return render(request, 'main/subscribs.html', {'form': form})
+        followed_users = UserFollows.objects.filter(user=request.user)
+        users = UserFollows.objects.filter(followed_user=request.user)
+    return render(request, 'main/subscribs.html', {'form': form, 'followed_users': followed_users, 'users': users})
 
 
 @login_required

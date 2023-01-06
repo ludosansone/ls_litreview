@@ -1,33 +1,66 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <h2>
-        Mes Abonnements
-    </h2>
+<h2>
+    Mes Abonnements
+</h2>
 
-    <h3>
-        Suivre un utilisateur
-    </h3>
+<h3>
+    Suivre un utilisateur
+</h3>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Valider le suivi"/>
-    </form>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Valider le suivi" />
+</form>
 
-    <h3>
-        Personnes que je suis
-    </h3>
+<h3>
+    Personnes que je suis
+</h3>
 
-    <p>
-        Ici, la liste des personnes que je suis
-    </p>
+{% if followed_users|length > 0 %}
+<table>
+    <tr>
+        <th>
+            Nom d'utilisateur
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+    {% for followed_user in followed_users %}
+    <tr>
+        <td>
+            {{ followed_user.followed_user.username }}
+        </td>
+        <td>
+            <a href="">
+                Ne plus suivre
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>
+    Aucun utilisateur suivi
+</p>
+{% endif %}
 
-    <h3>
-        Personnes qui me suivent
-    </h3>
-            
-    <p>
-        Ici, la liste des personnes qui me suivent
-    </p>
+<h3>
+    Personnes qui me suivent
+</h3>
+
+{% if users|length > 0 %}
+{% for user in users %}
+<p>
+    {{ user.user.username }}
+</p>
+{% endfor %}
+{% else %}
+<p>
+    Aucun utilisateur ne vous suit
+</p>
+{% endif %}
 {% endblock %}
