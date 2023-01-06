@@ -14,7 +14,7 @@
     </li>
 
     <li>
-        {% if user == review.user %}
+        {% if user == review.ticket.user %}
         A votre demande
         {% else %}
         A la demande de {{ review.ticket.user.username }}
@@ -39,6 +39,13 @@
     {% endif %}
 </p>
 
+{% if followed_user == False %}
+<p>
+    <a href="{% url 'follow_user' review.user.id %}">
+        Suivre {{ review.user.username }}
+    </a>
+</p>
+{% endif %}
 {% if user == review.user %}
 <p>
     <a href="{% url 'edit-review' review.id %}">
@@ -53,7 +60,7 @@
 </p>
 
 <p>
-    <a href="{% url 'contributions' %}">
+    <a href="{% url 'contributions' review.user.id %}">
         Retour à mes contributions
     </a>
 </p>

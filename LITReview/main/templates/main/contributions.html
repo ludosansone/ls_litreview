@@ -12,6 +12,20 @@
     {% endif %}
 </h2>
 
+{% if user == post_user %}
+<p>
+    <a href="{% url 'new-ticket' %}">
+        Créer un ticket
+    </a>
+</p>
+
+<p>
+    <a href="{% url 'new-ticket-and-review' %}">
+        Créer une critique
+    </a>
+</p>
+{% endif %}
+
 <table>
     <tr>
         <th>

@@ -1,6 +1,8 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+
+
 <h2>
     Mon Flux
 </h2>
@@ -17,8 +19,28 @@
     </a>
 </p>
 
+<table>
+    <tr>
+        <th>
+            Type de contribution
+        </th>
+        <th>
+            Intitulé
+        </th>
+        <th>
+            Date et heure de publication
+        </th>
+    </tr>
+    <tr>
+{% for post in context %}
+    {% if post.content_type == 'TICKET' %}
+    {% include 'main/snippets/ticket.html' %}
+    {% elif post.content_type == 'REVIEW' %}
+    {% include 'main/snippets/review.html' %}
+    {% endif %}
+    
+</tr>
+{% endfor %}
+</table>
 
-<p>
-    Ici, mon flux constitué de mes tickets, et de mes critiques
-</p>
 {% endblock %}

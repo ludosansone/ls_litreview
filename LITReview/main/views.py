@@ -10,7 +10,31 @@ from django.contrib import messages
 
 @login_required
 def home(request):
-    return render(request, 'main/home.html')
+    tickets = Ticket.objects.filter(user__id=request.user.id)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    reviews = Review.objects.filter(user__id=request.user.id)
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    reviews_from_tickets = Review.objects.filter(ticket__user__id=request.user.id)
+    reviews_from_tickets = reviews_from_tickets.annotate(content_type=Value('REVIEW', CharField()))
+    followed_users = UserFollows.objects.filter(user=request.user)
+
+    users_tickets = Ticket.objects.none()
+    for followed_user in followed_users:
+        users_tickets |= Ticket.objects.filter(user__id=followed_user.followed_user.id)
+    users_tickets = users_tickets.annotate(content_type=Value('TICKET', CharField()))
+
+    users_reviews = Review.objects.none()
+    for followed_user in followed_users:
+        users_reviews |= Review.objects.filter(user__id=followed_user.followed_user.id)
+    users_reviews = users_reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+    context = sorted(
+        chain(reviews, tickets, users_reviews, users_tickets, reviews_from_tickets),
+        key=lambda context: context.time_created,
+        reverse=True
+    )
+
+    return render(request, 'main/home.html', {'context': context})
 
 
 @login_required
@@ -71,7 +95,7 @@ def new_ticket(request):
                 description=form.cleaned_data['description'],
                 user=request.user)
             ticket.save()
-            return redirect('home')
+            return redirect('contributions', request.user.id)
     else:
         form = TicketForm()
 
@@ -85,7 +109,7 @@ def edit_ticket(request, id):
         form = TicketForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('contributions', request.user.id)
     else:
         form = TicketForm(instance=ticket)
 
@@ -105,7 +129,7 @@ def new_review(request, ticket_id):
                 user=request.user,
                 ticket=review_ticket)
             review.save()
-            return redirect('home')
+            return redirect('contributions', request.user.id)
     else:
         form = ReviewForm()
 
@@ -119,7 +143,7 @@ def edit_review(request, id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('contributions', request.user.id)
     else:
         form = ReviewForm(instance=review)
 
@@ -137,7 +161,13 @@ def details_ticket(request, id):
 def details_review(request, id):
     review = Review.objects.get(id=id)
 
-    return render(request, 'main/details-review.html', {'review': review})
+    try:
+        author = User.objects.get(id=id)
+        followed_user = UserFollows.objects.get(user=request.user, followed_user=author).exists()
+    except UserFollows.DoesNotExist:
+        followed_user = False
+
+    return render(request, 'main/details-review.html', {'review': review, 'followed_user': followed_user})
 
 
 @login_required
@@ -178,7 +208,7 @@ def new_ticket_and_review(request):
                 body=form_review.cleaned_data['body'],
                 rating=form_review.cleaned_data['rating'])
             new_review.save()
-            return redirect('contributions')
+            return redirect('contributions', request.user.id)
     else:
         form_ticket = TicketForm()
         form_review = ReviewForm()
@@ -192,5 +222,18 @@ def stop_follow(request, id):
     messages.add_message(request,
                          messages.SUCCESS, f'Vous avez cessé de suivre {user_to_delete.followed_user.username}.')
     user_to_delete.delete()
+
+    return redirect('subscribs')
+
+
+@login_required
+def follow_user(request, id):
+    author = User.objects.get(id=id)
+    new_followed_user = UserFollows(
+        user=request.user,
+        followed_user=author)
+    new_followed_user.save()
+    messages.add_message(request,
+                         messages.SUCCESS, f'Vous suivez maintenant {author.username}.')
 
     return redirect('subscribs')
