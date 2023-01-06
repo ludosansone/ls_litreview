@@ -162,10 +162,13 @@ def details_review(request, id):
     review = Review.objects.get(id=id)
 
     try:
-        author = User.objects.get(id=id)
+        author = User.objects.get(id=review.user.id)
         followed_user = UserFollows.objects.get(user=request.user, followed_user=author).exists()
     except UserFollows.DoesNotExist:
-        followed_user = False
+        if review.user.id != request.user.id:
+            followed_user = False
+        else:
+            followed_user = True
 
     return render(request, 'main/details-review.html', {'review': review, 'followed_user': followed_user})
 
