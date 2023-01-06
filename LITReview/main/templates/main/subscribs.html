@@ -5,11 +5,7 @@
     Mes Abonnements
 </h2>
 
-<h3>
-    Suivre un utilisateur
-</h3>
-<p>
-    {% if messages %}
+{% if messages %}
 <ul class="messages">
     {% for message in messages %}
     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
@@ -18,7 +14,10 @@
     {% endfor %}
 </ul>
 {% endif %}
-</p>
+
+<h3>
+    Suivre un utilisateur
+</h3>
 
 <form method="post">
     {% csrf_token %}

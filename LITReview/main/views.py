@@ -28,6 +28,7 @@ def subscribs(request):
                         user=request.user,
                         followed_user=followed_user)
                     user_follows.save()
+                    messages.add_message(request, messages.SUCCESS, f'Vous suivez maintenant {followed_user.username}.')
                     return redirect('subscribs')
             except:
                 messages.add_message(request, messages.ERROR, "Attention ! cet utilisateur n'existe pas.")
@@ -185,6 +186,8 @@ def new_ticket_and_review(request):
 @login_required
 def stop_follow(request, id):
     user_to_delete = UserFollows.objects.get(followed_user__id=id, user=request.user)
+    messages.add_message(request, messages.SUCCESS, f'Vous avez cessé de suivre {user_to_delete.followed_user.username}.')
     user_to_delete.delete()
+    
     return redirect('subscribs')
 
