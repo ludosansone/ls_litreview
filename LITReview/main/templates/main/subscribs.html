@@ -8,6 +8,17 @@
 <h3>
     Suivre un utilisateur
 </h3>
+<p>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+</p>
 
 <form method="post">
     {% csrf_token %}
@@ -35,7 +46,7 @@
             {{ followed_user.followed_user.username }}
         </td>
         <td>
-            <a href="">
+            <a href="{% url 'stop-follow' followed_user.followed_user.id %}">
                 Ne plus suivre
             </a>
         </td>

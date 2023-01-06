@@ -20,4 +20,5 @@ urlpatterns = [
     path('delete-ticket/<int:id>/', main_views.delete_ticket, name='delete-ticket'),
     path('delete-review/<int:id>/', main_views.delete_review, name='delete-review'),
     path('new-ticket-and-review', main_views.new_ticket_and_review, name='new-ticket-and-review'),
+    path('stop-follow/<int:id>/', main_views.stop_follow, name='stop-follow'),
 ]

@@ -3,10 +3,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import CharField, Value
 from main.models import Ticket, Review, UserFollows, User
-
-
 from main.forms import TicketForm, ReviewForm, FollowForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 @login_required
@@ -19,17 +18,28 @@ def subscribs(request):
     if request.method == 'POST':
         form = FollowForm(request.POST)
         if form.is_valid():
-            followed_user = User.objects.get(username=form.cleaned_data['username'])
-            user_follows = UserFollows(
-                user=request.user,
-                followed_user=followed_user)
-            user_follows.save()
-            return redirect('subscribs')
+            try:
+                followed_user = User.objects.get(username=form.cleaned_data['username'])
+                if request.user == followed_user:
+                    messages.add_message(request, messages.ERROR, 'Attention ! Vous ne pouvez pas vous suivre vous même.')
+                    return redirect('subscribs')
+                else:
+                    user_follows = UserFollows(
+                        user=request.user,
+                        followed_user=followed_user)
+                    user_follows.save()
+                    return redirect('subscribs')
+            except:
+                messages.add_message(request, messages.ERROR, "Attention ! cet utilisateur n'existe pas.")
+                return redirect('subscribs')
     else:
         form = FollowForm()
         followed_users = UserFollows.objects.filter(user=request.user)
         users = UserFollows.objects.filter(followed_user=request.user)
-    return render(request, 'main/subscribs.html', {'form': form, 'followed_users': followed_users, 'users': users})
+    return render(request, 'main/subscribs.html', {
+        'form': form,
+        'followed_users': followed_users,
+        'users': users})
 
 
 @login_required
@@ -170,3 +180,11 @@ def new_ticket_and_review(request):
         form_review = ReviewForm()
 
     return render(request, 'main/new-ticket-and-review.html', {'form_ticket': form_ticket, 'form_review': form_review})
+
+
+@login_required
+def stop_follow(request, id):
+    user_to_delete = UserFollows.objects.get(followed_user__id=id, user=request.user)
+    user_to_delete.delete()
+    return redirect('subscribs')
+
