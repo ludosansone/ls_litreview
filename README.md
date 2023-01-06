@@ -4,6 +4,21 @@
 
 
 
+## Clonage du dépôt
+
+Pour commancer, il vous faut cloner le dépôt du projet. Nous partons du principe que le programme git est installé sur votre ordinateur :
+
+1- Ouvrez un invite de commande si vous êtes sous Windows, ou un terminal si vous êtes sous Linux ou MacOSX
+
+2- Rendez-vous dans le dossier dans lequel vous souhaitez cloner le dépôt
+
+3- Saisissez la commande `git clone https://github.com/ludosansone/ls_litreview.git`
+
+4- Le dépôt est pret, vous pouvez y accéder en tapant `cd ls_litreview`
+
+
+
+
 ## Installation de l'environnement virtuel
 
 Afin de garentir le bon fonctionnement de cette application web, vous devez l'exécuter dans le même environnement virtuel que le développeur. Pour se faire, suivez les instructions d'installation ci-dessous.
