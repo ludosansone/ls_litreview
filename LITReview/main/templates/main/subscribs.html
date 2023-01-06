@@ -42,7 +42,9 @@
     {% for followed_user in followed_users %}
     <tr>
         <td>
-            {{ followed_user.followed_user.username }}
+            <a href="{% url 'contributions' followed_user.followed_user.id %}">
+                {{ followed_user.followed_user.username }}
+            </a>
         </td>
         <td>
             <a href="{% url 'stop-follow' followed_user.followed_user.id %}">

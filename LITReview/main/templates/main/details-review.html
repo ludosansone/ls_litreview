@@ -14,7 +14,11 @@
     </li>
 
     <li>
+        {% if user == review.user %}
+        A votre demande
+        {% else %}
         A la demande de {{ review.ticket.user.username }}
+        {% endif %}
     </li>
 </ul>
 
@@ -27,9 +31,15 @@
 </article>
 
 <p>
-    Posté par : {{ review.user.username }}
+    Posté par 
+    {% if user == review.user %}
+    vous
+    {% else %}
+    {{ review.user.username }}
+    {% endif %}
 </p>
 
+{% if user == review.user %}
 <p>
     <a href="{% url 'edit-review' review.id %}">
         Modifier la critique
@@ -47,4 +57,12 @@
         Retour à mes contributions
     </a>
 </p>
+{% else %}
+<p>
+    <a href="{% url 'contributions' review.user.id %}">
+        Retour au contributions de {{ review.user.username }}
+    </a>
+</p>
+{% endif %}
+
 {% endblock %}

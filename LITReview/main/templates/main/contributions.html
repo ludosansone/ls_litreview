@@ -1,9 +1,17 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+
+
+{% if context|length > 0%}
 <h2>
+    {% if user == post_user %}
     Mes Contributions
+    {% else %}
+    Contrubutions de {{ post_user.username }}
+    {% endif %}
 </h2>
+
 <table>
     <tr>
         <th>
@@ -15,13 +23,14 @@
         <th>
             Date et heure de publication
         </th>
+        {% if user == post_user %}
         <th>
             Actions
         </th>
+        {% endif %}
     </tr>
     <tr>
 {% for post in context %}
-<p>
     {% if post.content_type == 'TICKET' %}
     {% include 'main/snippets/ticket.html' %}
     {% elif post.content_type == 'REVIEW' %}
@@ -31,5 +40,19 @@
 </tr>
 {% endfor %}
 </table>
+{% else %}
+<p>
+    {% if user == post_user %}
+    Vous n'avez aucune contribution pour le moment
+    {% else %}
+    {{ post_user.username }} n'a aucune contribution pour le moment
+    {% endif %}
+</p>
+{% endif %}
 
+<p>
+    <a href="{% url 'subscribs' %}">
+        Retour à mes abonnements
+    </a>
+</p>
 {% endblock %}

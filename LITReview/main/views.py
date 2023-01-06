@@ -46,18 +46,19 @@ def subscribs(request):
 
 
 @login_required
-def contributions(request):
-    tickets = Ticket.objects.filter(user=request.user)
+def contributions(request, id):
+    tickets = Ticket.objects.filter(user__id=id)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
-    reviews = Review.objects.filter(user=request.user)
+    reviews = Review.objects.filter(user__id=id)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
     context = sorted(
         chain(reviews, tickets),
         key=lambda context: context.time_created,
         reverse=True
     )
+    post_user = User.objects.get(id=id)
 
-    return render(request, 'main/contributions.html', {'context': context})
+    return render(request, 'main/contributions.html', {'context': context, 'post_user': post_user})
 
 
 @login_required
@@ -144,7 +145,7 @@ def delete_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
     if request.method == 'POST':
         ticket.delete()
-        return redirect('contributions')
+        return redirect('contributions', request.user.id)
 
     return render(request, 'main/delete-ticket.html', {'ticket': ticket})
 
@@ -154,7 +155,7 @@ def delete_review(request, id):
     review = Review.objects.get(id=id)
     if request.method == 'POST':
         review.delete()
-        return redirect('contributions')
+        return redirect('contributions', request.user.id)
 
     return render(request, 'main/delete-review.html', {'review': review})
 

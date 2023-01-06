@@ -9,6 +9,7 @@
     Publié le {{ ticket.time_created|date:"d/m/Y à H:m" }}
 </p>
 
+{% if ticket.description|length > 0 %}
 <h3>
     Description
 </h3>
@@ -16,9 +17,19 @@
 <p>
     {{ ticket.description }}
 </p>
+{% else %}
+<p>
+    Aucune description
+</p>
+{% endif %}
 
 <p>
-    Posté par : {{ ticket.user.username }}
+    Posté par 
+    {% if user == ticket.user %}
+    vous
+    {% else %}
+    {{ ticket.user.username }}
+    {% endif %}
 </p>
 
 <p>
@@ -26,6 +37,8 @@
         Rédiger une critique
     </a>
 </p>
+
+{% if user == ticket.user %}
 <p>
     <a href="{% url 'edit-ticket' ticket.id %}">
         Modifier le ticket
@@ -43,4 +56,11 @@
         Retour à mes contributions
     </a>
 </p>
+{% else %}
+<p>
+    <a href="{% url 'contributions' ticket.user.id %}">
+        Retour aux contributions de {{ ticket.user.username }}
+    </a>
+</p>
+{% endif %}
 {% endblock %}
