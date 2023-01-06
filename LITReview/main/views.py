@@ -21,16 +21,18 @@ def subscribs(request):
             try:
                 followed_user = User.objects.get(username=form.cleaned_data['username'])
                 if request.user == followed_user:
-                    messages.add_message(request, messages.ERROR, 'Attention ! Vous ne pouvez pas vous suivre vous même.')
+                    messages.add_message(request,
+                                         messages.ERROR, 'Attention ! Vous ne pouvez pas vous suivre vous même.')
                     return redirect('subscribs')
                 else:
                     user_follows = UserFollows(
                         user=request.user,
                         followed_user=followed_user)
                     user_follows.save()
-                    messages.add_message(request, messages.SUCCESS, f'Vous suivez maintenant {followed_user.username}.')
+                    messages.add_message(request,
+                                         messages.SUCCESS, f'Vous suivez maintenant {followed_user.username}.')
                     return redirect('subscribs')
-            except:
+            except User.DoesNotExist:
                 messages.add_message(request, messages.ERROR, "Attention ! cet utilisateur n'existe pas.")
                 return redirect('subscribs')
     else:
@@ -186,8 +188,8 @@ def new_ticket_and_review(request):
 @login_required
 def stop_follow(request, id):
     user_to_delete = UserFollows.objects.get(followed_user__id=id, user=request.user)
-    messages.add_message(request, messages.SUCCESS, f'Vous avez cessé de suivre {user_to_delete.followed_user.username}.')
+    messages.add_message(request,
+                         messages.SUCCESS, f'Vous avez cessé de suivre {user_to_delete.followed_user.username}.')
     user_to_delete.delete()
-    
-    return redirect('subscribs')
 
+    return redirect('subscribs')
