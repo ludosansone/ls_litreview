@@ -61,13 +61,13 @@
 
 <p>
     <a href="{% url 'contributions' review.user.id %}">
-        Retour à mes contributions
+        Mes contributions
     </a>
 </p>
 {% else %}
 <p>
     <a href="{% url 'contributions' review.user.id %}">
-        Retour au contributions de {{ review.user.username }}
+        Contributions de {{ review.user.username }}
     </a>
 </p>
 {% endif %}

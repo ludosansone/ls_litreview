@@ -4,11 +4,12 @@
 <td>
     <a href="{% url 'details-ticket' post.id %}">
         {{ post.title }} ({{ post.get_review_number }} critique{{ post.get_review_number|pluralize }})
-    </a>
+    </a><br/>
+    Par {{ post.user.username }}
 </td>
-<TD>
-    Le {{ post.time_created|date:"d/m/Y à H:m" }}
-</TD>
+<td>
+    Le {{ post.time_created|date:"d/m/Y à H:i" }}
+</td>
 {% if user == post_user %}
 <td>
     <a href="{% url 'edit-ticket' post.id %}">

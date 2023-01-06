@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
 <h2>
     Mon Flux
 </h2>
@@ -38,9 +37,7 @@
     {% elif post.content_type == 'REVIEW' %}
     {% include 'main/snippets/review.html' %}
     {% endif %}
-    
 </tr>
 {% endfor %}
 </table>
-
 {% endblock %}

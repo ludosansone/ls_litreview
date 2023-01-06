@@ -27,9 +27,9 @@ def home(request):
     for followed_user in followed_users:
         users_reviews |= Review.objects.filter(user__id=followed_user.followed_user.id)
     users_reviews = users_reviews.annotate(content_type=Value('REVIEW', CharField()))
-
+    context = set(chain(reviews, tickets, users_reviews, users_tickets, reviews_from_tickets),)
     context = sorted(
-        chain(reviews, tickets, users_reviews, users_tickets, reviews_from_tickets),
+        context,
         key=lambda context: context.time_created,
         reverse=True
     )

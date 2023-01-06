@@ -4,10 +4,11 @@
 <td>
     <a href="{% url 'details-review' post.id %}">
         {{ post.headline }} ({{ post.ticket }})
-    </a>
+    </a><br/>
+    Par {{ post.user.username }}
 </td>
 <TD>
-    Le {{ post.time_created|date:"d/m/Y à H:m" }}
+    Le {{ post.time_created|date:"d/m/Y à H:i" }}
 </TD>
 {% if user == post_user %}
 <td>
