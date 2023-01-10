@@ -102,18 +102,18 @@ Pour vous inscrire, cliquez sur le lien "S'inscrire", puis saisissez vos informa
 
 La page d'accueil, comme l'ensemble des pages de l'application, contient le menu de navigation. Il vous permet d'accéder à :
 
-    -vos abonnements
-    -vos contributions
-    -ou à la déconnexion
+- vos abonnements
+- vos contributions
+- ou à la déconnexion
 
 
 ### Accueil
 
 La page d'accueil affiche votre flux. Il est constitué de :
 
-    -vos contributions : Les critiques que vous avez publiées, et celles que vous avez sollicitées via des tickets
-    -les contributions des utilisateurs que vous suivez
-    -les critiques répondant à vos tickets, même si son auteur ne fait pas partie des utilisateurs que vous suivez
+- vos contributions : Les critiques que vous avez publiées, et celles que vous avez sollicitées via des tickets
+- les contributions des utilisateurs que vous suivez
+- les critiques répondant à vos tickets, même si son auteur ne fait pas partie des utilisateurs que vous suivez
 
 Cliquez simplement sur l'intitulé d'une contribution, pour accéder à ses détails, et réaliser les opérations adaptées au type de contribution sélectionnée.
 
