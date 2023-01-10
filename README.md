@@ -27,7 +27,7 @@ Attention, nous partons du principe que les paquets pip et venv sont bien instal
 
 ### Installation sous Windows
 
-1- Ouvrez l'invite de commandes
+1. Ouvrez l'invite de commandes
 
 2. Déplacez-vous à la racine du dossier ls_litreview, à l'aide de la commande cd
 
