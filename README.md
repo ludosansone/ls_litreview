@@ -8,13 +8,13 @@
 
 Pour commancer, il vous faut cloner le dépôt du projet. Nous partons du principe que le programme git est installé sur votre ordinateur :
 
-1- Ouvrez un invite de commande si vous êtes sous Windows, ou un terminal si vous êtes sous Linux ou MacOSX
+1. Ouvrez un invite de commande si vous êtes sous Windows, ou un terminal si vous êtes sous Linux ou MacOSX
 
-2- Rendez-vous dans le dossier dans lequel vous souhaitez cloner le dépôt
+2. Rendez-vous dans le dossier dans lequel vous souhaitez cloner le dépôt
 
-3- Saisissez la commande `git clone https://github.com/ludosansone/ls_litreview.git`
+3. Saisissez la commande `git clone https://github.com/ludosansone/ls_litreview.git`
 
-4- Le dépôt est pret, vous pouvez y accéder en tapant `cd ls_litreview`
+4. Le dépôt est pret, vous pouvez y accéder en tapant `cd ls_litreview`
 
 
 
@@ -29,26 +29,26 @@ Attention, nous partons du principe que les paquets pip et venv sont bien instal
 
 1- Ouvrez l'invite de commandes
 
-2- Déplacez-vous à la racine du dossier ls_litreview, à l'aide de la commande cd
+2. Déplacez-vous à la racine du dossier ls_litreview, à l'aide de la commande cd
 
-3- Pour créer l'environnement virtuel, saisissez la commande : `python -m venv env`
+3. Pour créer l'environnement virtuel, saisissez la commande : `python -m venv env`
 
-4- Pour démarrer ce dernier, saisissez la commande : `env\Scripts\activate`
+4. Pour démarrer ce dernier, saisissez la commande : `env\Scripts\activate`
 
-5- Pour y installer les paquets nécessaires à la bonne exécution du projet, saisissez la commande : `pip install -r requirements.txt`
+5. Pour y installer les paquets nécessaires à la bonne exécution du projet, saisissez la commande : `pip install -r requirements.txt`
 
 
 ### Installation sous Linux ou MacOSX
 
-1- Ouvrez un terminal
+1. Ouvrez un terminal
 
-2- Déplacez-vous à la racine du dossier ls_litreview, à l'aide de la commande cd
+2. Déplacez-vous à la racine du dossier ls_litreview, à l'aide de la commande cd
 
-3- Pour créer l'environnement virtuel, saisissez la commande : `python -m venv env`
+3. Pour créer l'environnement virtuel, saisissez la commande : `python -m venv env`
 
-4- Pour démarrer ce dernier, saisissez la commande : `source env/bin/activate`
+4. Pour démarrer ce dernier, saisissez la commande : `source env/bin/activate`
 
-5- Pour y installer les paquets nécessaires à la bonne exécution du projet, saisissez la commande : `pip install -r requirements.txt`
+5. Pour y installer les paquets nécessaires à la bonne exécution du projet, saisissez la commande : `pip install -r requirements.txt`
 
 
 
@@ -58,9 +58,9 @@ Afin de vérifier que le code du programme répond bien à la norme PEP-8, vous 
 
 Pour que Flake8 affiche son rapport directement dans la console : 
 
-1- Déplacez-vous à la racine du projet, dans le dossier ls_litreview/litreview, à l'aide de la commande cd
+1. Déplacez-vous à la racine du projet, dans le dossier ls_litreview/litreview, à l'aide de la commande cd
 
-2- puis saisissez la commande `flake8`
+2. puis saisissez la commande `flake8`
 
 
 
@@ -69,17 +69,17 @@ Pour que Flake8 affiche son rapport directement dans la console :
 
 Attention, avant de lancer l'application, assurez-vous que l'environnement virtuel est activé.
 
-1- Ouvrez l'invite de commandes
+1. Ouvrez l'invite de commandes
 
-2- Déplacez-vous à la racine du projet, dans le dossier ls_litreview/litreview, à l'aide de la commande cd
+2. Déplacez-vous à la racine du projet, dans le dossier ls_litreview/litreview, à l'aide de la commande cd
 
-3- Saisissez la commande `python manage.py runserver`
+3. Saisissez la commande `python manage.py runserver`
 
-4- Le serveur de développement se lance, et nous invite à nous rendre à l'adresse http://127.0.0.1:8000/
+4. Le serveur de développement se lance, et nous invite à nous rendre à l'adresse http://127.0.0.1:8000/
 
-5- Ouvrez votre navigateur, et rendez-vous à l'adresse indiquée
+5. Ouvrez votre navigateur, et rendez-vous à l'adresse indiquée
 
-6- L'application est prête
+6. L'application est prête
 
 
 
