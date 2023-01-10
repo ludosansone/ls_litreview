@@ -6,9 +6,9 @@
 
 ## Clonage du dépôt
 
-Pour commancer, il vous faut cloner le dépôt du projet. Nous partons du principe que le programme git est installé sur votre ordinateur :
+Pour commencer, il vous faut cloner le dépôt du projet. Nous partons du principe que le programme git est installé sur votre ordinateur :
 
-1. Ouvrez un invite de commande si vous êtes sous Windows, ou un terminal si vous êtes sous Linux ou MacOSX
+1. Ouvrez une invite de commande si vous êtes sous Windows, ou un terminal si vous êtes sous Linux ou MacOSX
 
 2. Rendez-vous dans le dossier dans lequel vous souhaitez cloner le dépôt
 
@@ -21,7 +21,7 @@ Pour commancer, il vous faut cloner le dépôt du projet. Nous partons du princi
 
 ## Installation de l'environnement virtuel
 
-Afin de garentir le bon fonctionnement de cette application web, vous devez l'exécuter dans le même environnement virtuel que le développeur. Pour se faire, suivez les instructions d'installation ci-dessous.
+Afin de garantir le bon fonctionnement de cette application web, vous devez l'exécuter dans le même environnement virtuel que le développeur. Pour se faire, suivez les instructions d'installation ci-dessous.
 Attention, nous partons du principe que les paquets pip et venv sont bien installés sur votre ordinateur. Si tel n'est pas le cas, veuillez vous référer à leur documentation respective pour procéder à leur installation.
 
 
@@ -60,7 +60,7 @@ Pour que Flake8 affiche son rapport directement dans la console :
 
 1. Déplacez-vous à la racine du projet, dans le dossier ls_litreview/litreview, à l'aide de la commande cd
 
-2. puis saisissez la commande `flake8`
+2. Puis saisissez la commande `flake8`
 
 
 
@@ -93,7 +93,7 @@ L'application web LitReview, permet à ses utilisateurs de consulter, solliciter
 
 L'application vous accueille en vous proposant de vous inscrire, ou si vous possédez déjà un compte, de vous connecter.
 
-Ppour vous connecter, saisissez simplement vos identifiants dans le formulaire, sur la partie droite de la page.
+Pour vous connecter, saisissez simplement vos identifiants dans le formulaire, sur la partie droite de la page.
 
 Pour vous inscrire, cliquez sur le lien "S'inscrire", puis saisissez vos informations personnelles. Votre compte sera instantanément créé, et vous serez automatiquement connecté.
 
@@ -104,7 +104,7 @@ La page d'accueil, comme l'ensemble des pages de l'application, contient le menu
 
 - vos abonnements
 - vos contributions
-- ou à la déconnexion
+- à la déconnexion
 
 
 ### Accueil

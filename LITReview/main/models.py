@@ -17,7 +17,7 @@ class User(AbstractUser):
 
 class Ticket(models.Model):
     title = models.CharField(verbose_name='Titre', max_length=128)
-    description = models.CharField(verbose_name='Description',
+    description = models.TextField(verbose_name='Description',
                                    max_length=2048,
                                    blank=True)
     user = models.ForeignKey(to=get_user_model(),
@@ -40,7 +40,7 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)],
                                               verbose_name='Notation')
     headline = models.CharField(max_length=128, verbose_name='Entête')
-    body = models.CharField(max_length=8192, blank=True, verbose_name='Critique')
+    body = models.TextField(max_length=8192, blank=True, verbose_name='Critique')
     user = models.ForeignKey(to=get_user_model(),
                              on_delete=models.CASCADE,
                              editable=False)
